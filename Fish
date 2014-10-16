@@ -1,0 +1,51 @@
+ // instance of class
+  FishingGameSimulator feSim = new FishingGameSimulator();
+  
+  // set up outcome map
+  Map<Integer, RollOutcome> outComeMap = new HashMap<>();
+  outComeMap.put(1, feSim.new RollOutcome("huge fish", 10));
+  outComeMap.put(2, feSim.new RollOutcome("an old shoe", 20));
+  outComeMap.put(3, feSim.new RollOutcome("little fish", 30));
+  outComeMap.put(4, feSim.new RollOutcome("30 inch walleye", 40));
+  outComeMap.put(5, feSim.new RollOutcome("Salt water redfish", 50));
+  outComeMap.put(6, feSim.new RollOutcome("52 inch muskellunge", 60));
+  
+  // Create a Scanner object for keyboard input.
+  Scanner keyboard = new Scanner(System.in);
+  
+  String continuePlay = "";
+  Integer totalFishingPoints = 0;
+  
+  System.out.println("Lets go fishing!");
+  
+  do {
+    
+    Die die = feSim.new Die();
+    
+    RollOutcome outcome = outComeMap.get(die.getValue());
+    
+    System.out.println("You rolled: \t\t" + die.getValue());
+    System.out.println("You caught: \t\t" + outcome.getMessage());
+    System.out.println("Points: \t\t" + outcome.getPoints());
+    
+    // track points 
+    totalFishingPoints += outcome.getPoints();
+    
+    // ask user to play again
+    System.out.println("");
+    System.out.println("Lets go fishing! Enter Y to play: ");
+    continuePlay = keyboard.next();
+    
+  } while (continuePlay.equalsIgnoreCase("Y"));
+  
+  System.out.println("Thanks for playing, total points: " + totalFishingPoints);
+  
+  //Game over message
+  if (totalFishingPoints < 100) {
+    System.out.println("Better Luck next time");
+  } else {
+    System.out.println("BOOM, lets get the grill started");
+  }
+  
+  // close keyboard
+  keyboard.close();
